@@ -15,13 +15,13 @@ export const Home = () => {
 
     if(!Recipes) return <p>error finding recipes</p>
 
-    const {search} = useSearch
-    const matchQuery = Recipes.filter(recipe => recipe.name.toLowerCase().includes(search))
+    const search = useSearch()
+    const matchQuery = Recipes.filter(recipe => recipe.name.toLowerCase().includes(search?.searchQuery))
     return(
     <>
      <h1>home</h1>
      <SearchBar/>
-     {Recipes.map((recipe,index) => {
+     {matchQuery.map((recipe,index) => {
         return(
             <div key={index}>
                 <RecipeCard recipe={recipe} navigate={navigate}/>
